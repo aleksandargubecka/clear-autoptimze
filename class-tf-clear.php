@@ -1,8 +1,10 @@
 <?php
 
 
-class CA_Clear
+class TF_Clear
 {
+	private $opts;
+	
 	public static function getInstance()
 	{
 		static $instance = null;
@@ -18,15 +20,24 @@ class CA_Clear
 		if (!class_exists('autoptimizeCache'))
 			return;
 		
+		$default_opts = array(
+			'size' => 800,
+			'email' => ''
+		);
+		
+		$this->opts = get_option( 'tf_clear_autoptimize_options', $default_opts );
+		
 		$this->clear();
 	}
 	
 	private function clear()
 	{
 		$size = $this->dirSize();
-		if ($size >= 800 && class_exists('autoptimizeCache')) {
+		if ($size >= $this->opts['size'] && class_exists('autoptimizeCache')) {
 			autoptimizeCache::clearall();
-			mail('example@gmail.com', 'Autooptimze Cache cleared!', 'Autoptimzie cache cleared. It got up to ' . $size . ' MB');
+			if(!empty($this->opts['email'])){
+				mail($this->opts['email'], 'Autooptimze Cache cleared!', 'Autoptimzie cache cleared. It got up to ' . $size . ' MB');
+			}
 			return;
 		}
 	}

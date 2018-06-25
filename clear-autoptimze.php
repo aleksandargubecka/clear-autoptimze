@@ -2,7 +2,7 @@
 /*
 Plugin Name: Themes Factory Clear Autoptimize
 Plugin URI: https://themesfactory.io
-Description: This plugin will run a daily cron job that will clear autoptimze cache
+Description: This plugin will run a hourly cron job that will clear autoptimze cache
 Version: 1.0.0
 Author: themesfactory
 Author URI: https://themesfactory.io
